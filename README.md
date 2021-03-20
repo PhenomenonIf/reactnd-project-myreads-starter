@@ -1,5 +1,5 @@
 # MyReads Project
-The project contained in this repository is the "My Reads" project, which is the first of the three projects in the Udacity Front-end Nanodegree Program. The application is basically for keeping track of books. It categorizes books into three sections, namely: 
+The project contained in this repository is the "My Reads" project, which is the first of the three projects in the Udacity React Nanodegree Program. The application is basically for keeping track of books. It categorizes books into three sections, namely: 
 - Currently Reading
 - Want to Read
 - and Read
