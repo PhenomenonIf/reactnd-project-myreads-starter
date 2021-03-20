@@ -13,4 +13,4 @@ The application should launch in your browser at this point. If not, open your d
 # Using the Application
 The first page is the books/shelves list. You can use the arrow button to move a book between shelves. Click on the shelf name to hide a shelf from view, and click again to show the shelf.
 
-If you click on the + icon on the bottom right of the document, it will bring you to the search page. Here, you can search for books, and add it to one of your shelves.
+If you click on the 'Search' on the bottom right of the document, it will bring you to the search page. Here, you can search for books, and add it to one of your shelves.
