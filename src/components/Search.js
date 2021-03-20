@@ -13,15 +13,14 @@ class Search extends React.Component {
     error: false
   }
 
-  handleQuery(query) {
+  // A function to search for books based on input parameter
+  handleSearch(query) {
     this.setState({ error: false })
-    // Run search if no empty string, otherwise clear results to prevent errors
     if (query.replace(/\s/g, "") !== "") {
-      const searchQuery = query.trim();
-      BooksAPI.search(searchQuery).then(result => {
-        // Set book shelves if no error, otherwise clear results and set error state
+      const input = query.trim();
+      BooksAPI.search(input).then(result => {
         if (!result.error) {
-          this.props.checkShelf(result)
+          this.props.assignToShelf(result)
           result.sort(sortBy('title'))
           this.setState({ results: result })
         } else {
@@ -34,9 +33,8 @@ class Search extends React.Component {
     }
   }
 
-  clearResults(val) {
-    // Clear results if search field is empty
-    // Prevents issue when backspace is held down to clear query
+  clear(val) {
+    // This function ensures that the search result page is cleared when there is no text in the search box
     if (val === "") {
       this.setState({ results: [] })
     }
@@ -44,15 +42,15 @@ class Search extends React.Component {
 
   render() {
     const results = this.state.results;
-    const { checkShelf, moveShelf } = this.props;
+    const { assignToShelf, changeShelf } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
                         <input type="text" placeholder="Search by title or author"
-                         id="search-input" onChange={(e) => this.handleQuery(e.target.value)} 
-                        onKeyDown={(e) => this.clearResults(e.target.value)} />
+                         id="search-input" onChange={(e) => this.handleSearch(e.target.value)} 
+                        onKeyDown={(e) => this.clear(e.target.value)} />
           </div>
         </div>
         <div className="search-books-results">
@@ -67,7 +65,7 @@ class Search extends React.Component {
                 key={result.id}
                 book={result}
                 books={results}
-                moveShelf={moveShelf}
+                changeShelf={changeShelf}
               />
             ))}
           </ol>
@@ -78,8 +76,8 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-  checkShelf: PropTypes.func.isRequired,
-  moveShelf: PropTypes.func.isRequired
+  assignToShelf: PropTypes.func.isRequired,
+  changeShelf: PropTypes.func.isRequired
 }
 
 export default Search

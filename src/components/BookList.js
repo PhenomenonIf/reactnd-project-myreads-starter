@@ -1,34 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import BookShelf from './Shelf'
+import Shelf from './Shelf'
 import '../App.css'
 
 class BookList extends React.Component {
-  
-    state = {
-        currentlyReading: true,
-        wantToRead: true,
-        read: true
-    }
+
 
     render() {
-        const { books, moveShelf } = this.props;
+        const { books, changeShelf } = this.props;
         const shelves = [
             {
-                id: 'currentlyReading',
-                name: 'Currently Reading'
+                id: 1,
+                name: 'currentlyReading'
             },
             {
-                id: 'wantToRead',
-                name: 'Want to Read'
+                id: 2,
+                name: 'wantToRead'
             },
             {
-                id: 'read',
-                name: 'Read'
+                id: 3,
+                name: 'read'
             }
         ]
-        console.log(books);
+        
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -37,11 +32,11 @@ class BookList extends React.Component {
                 <div className="list-books-content">
                     <div>
                         {shelves.map((shelf) => (
-                            <BookShelf
+                            <Shelf
                                 key={shelf.id}
                                 shelf={shelf}
                                 books={books}
-                                moveShelf={moveShelf}
+                                changeShelf={changeShelf}
                             />
                         ))}
                     </div>
@@ -56,7 +51,7 @@ class BookList extends React.Component {
 
 BookList.propTypes = {
   books: PropTypes.array.isRequired,
-  moveShelf: PropTypes.func.isRequired
+  changeShelf: PropTypes.func.isRequired
 }
 
 

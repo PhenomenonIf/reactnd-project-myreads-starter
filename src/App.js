@@ -11,35 +11,36 @@ class App extends React.Component {
     books: []
   }
   componentDidMount() {
-    // Get books on mounting
-    this.getBooks()
+    // Initialize state with books from the endpoint when the component is mounted
+    this.loadBooks()
   }
 
-  getBooks() {
+  loadBooks() {
     BooksAPI.getAll().then(books => {
       books.sort(sortBy('title'))
       this.setState({ books })
     })
   }
-  moveShelf = (book, shelf, allBooks) => {
+
+  // A function that organizes books in appropriate shelf
+  changeShelf = (book, shelf, allBooks) => {
     BooksAPI.update(book, shelf).then(() => {
-      // Set shelf then update state, and finally get books
-      const newBooksData = allBooks;
-      const bookIndex = newBooksData.indexOf(book);
-      newBooksData[bookIndex].shelf = shelf;
-      this.setState({ books: newBooksData })
-      this.getBooks()
+      const booksData = allBooks;
+      const index = booksData.indexOf(book);
+      booksData[index].shelf = shelf;
+      this.setState({ books: booksData })
+      this.loadBooks()
     })
   }
 
-  checkShelf = (bookResults) => {
-    //Check and update shelves on search
-    bookResults.forEach(thisBook => {
-      this.state.books.forEach(storedBook => {
-        if (thisBook.id === storedBook.id) {
-          thisBook.shelf = storedBook.shelf;
-        } else if (!thisBook.shelf) {
-          thisBook.shelf = 'none'
+
+  assignToShelf = (booksFromQuerry) => {
+    booksFromQuerry.forEach(book => {
+      this.state.books.forEach(bookFromState => {
+        if (book.id === bookFromState.id) {
+          book.shelf = bookFromState.shelf;
+        } else if (!book.shelf) {
+          book.shelf = 'none'
         }
       })
     })
@@ -50,14 +51,14 @@ class App extends React.Component {
       <div className="app">
         <Route exact path="/" render={() => (
           <BookList
-            moveShelf={this.moveShelf}
+            changeShelf={this.changeShelf}
             books={this.state.books}
           />
         )} />
         <Route path="/search" render={({ location }) => (
           <Search
-            checkShelf={this.checkShelf}
-            moveShelf={this.moveShelf}
+            assignToShelf={this.assignToShelf}
+            changeShelf={this.changeShelf}
           />
         )} />
       </div>
