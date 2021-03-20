@@ -1,16 +1,19 @@
 # MyReads Project
-This is the "MyReads" project through the Udacity Front-end Nanodegree Program. Its functional purpose is to categorize books between books you are currently reading, want to read, and have read, as well as giving you a search feature to search for books.
+The project contained in this repository is the "My Reads" project, which is the first of the three projects in the Udacity Front-end Nanodegree Program. The application is basically for keeping track of books. It categorizes books into three sections, namely: 
+- Currently Reading
+- Want to Read
+- and Read
 
 # How to Run
-To run this application, just clone it to your local machine, and make sure you have npm installed.
-
-In your console, type:
+You need to have node installed on your local machine to run this application. After installing node, you can open your terminal (or command prompt for Windows)
+and run the following commands:
 
 npm install
 npm start
+
 The application should launch in your browser at this point. If not, open your default browser and navigage to http://localhost:3000.
 
 # Using the Application
-The first page is the books/shelves list. You can use the arrow button to move a book between shelves. Click on the shelf name to hide a shelf from view, and click again to show the shelf.
+The home page of this application displays a list of books in three categories (mentioned above). You can use the arrow button to move a book between shelves. Click on the shelf name to hide a shelf from view, and click again to show the shelf.
 
-If you click on the 'Search' on the bottom right of the document, it will bring you to the search page. Here, you can search for books, and add it to one of your shelves.
+To search for specific books based on author or title, click on the 'Search' link at the bottom right of the page; this will display the list of books corresponding to your query. If your query does not return a result, a message is displayed indicating that no titles were found.
